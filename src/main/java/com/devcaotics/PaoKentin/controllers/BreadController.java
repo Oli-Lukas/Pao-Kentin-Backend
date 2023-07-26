@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.devcaotics.PaoKentin.model.entities.Pao;
-import com.devcaotics.PaoKentin.model.repositories.RepositorioPao;
+import com.devcaotics.PaoKentin.model.entities.Bread;
+import com.devcaotics.PaoKentin.model.repositories.BreadRepository;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/pao")
-public class PaoController
+@RequestMapping("/bread")
+public class BreadController
 {
 	@PostMapping
-	public String create(@RequestBody Pao pao)
+	public String create(@RequestBody Bread pao)
 	{
 		try
-		{			
-			RepositorioPao.getCurrentInstance().create(pao);
+		{
+			BreadRepository.getCurrentInstance().create(pao);
 			return "Pao criado com sucesso!";
 		}
 		catch(SQLException e)
@@ -34,21 +34,21 @@ public class PaoController
 	}
 	
 	@GetMapping("/{id}")
-	public Pao read(@PathVariable("id") int id)
+	public Bread read(@PathVariable("id") int id)
 	{
-		Pao pao = RepositorioPao.getCurrentInstance().read(id);
+		Bread pao = BreadRepository.getCurrentInstance().read(id);
 		return pao;
 	}
 	
 	@GetMapping
-	public List<Pao> readAll()
+	public List<Bread> readAll()
 	{
-		return RepositorioPao.getCurrentInstance().readAll();
+		return BreadRepository.getCurrentInstance().readAll();
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") int id)
 	{
-		RepositorioPao.getCurrentInstance().delete(id);
+		BreadRepository.getCurrentInstance().delete(id);
 	}
 }
